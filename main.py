@@ -16,34 +16,24 @@ app.add_middleware(
     allow_headers=["*"],  # すべてのHTTPヘッダーを許可
 )
 
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello")
-async def say_hello():
-    return {"message": "Hello"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
-
-
 class User(BaseModel):
-    name: str
-    department: str
+    name: str = Form(...)
+    department: str = Form(...)
+
 
 
 # 仮のデータストア
 data_store = []
 
 
-@app.post("/submit")
-async def submit(name: str = Form(...), department: str = Form(...), file: UploadFile = File(...)):
-    user_data = {"name": name, "department": department}
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+
+@app.post("/multi_type")
+async def multi_type(user: User, file: UploadFile = File(...)):
+    user_data = {"name": user.name, "department": user.department}
     file_content = await file.read()
     file_content_base64 = base64.b64encode(file_content)
     data_store.append(user_data)

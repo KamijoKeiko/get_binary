@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import * as React from 'react';
+import {useState} from "react";
 import axios from 'axios';
 
 type User = {
@@ -18,7 +19,7 @@ export const App: React.FC = () => {
         formData.append('file', file)
 
         try {
-            const response = await axios.post('http://localhost:7000/submit', formData);
+            const response = await axios.post('http://localhost:7000/multi_type', formData);
             console.log(response.data);
         } catch (error) {
             console.error('Error:', error);
@@ -26,24 +27,25 @@ export const App: React.FC = () => {
     };
 
     return (
-        <><input
-            type="text"
-            value={user.name}
-            onChange={(e) => setUser({...user, name: e.target.value})}
-            placeholder="Name"
-        />
-            <input
+        <>
+            <p>名　　　前：<input
+                type="text"
+                value={user.name}
+                onChange={(e) => setUser({...user, name: e.target.value})}
+                placeholder="Name"
+            /></p>
+            <p>所　　　属：<input
                 type="text"
                 value={user.department}
                 onChange={(e) => setUser({...user, department: e.target.value})}
                 placeholder="Department"
-            />
-            <input
+            /></p>
+            <p>チェックシート：<input
                 type="file"
                 onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
-            />
+            /></p>
 
-            <button onClick={handleClick}>Submit</button>
+            <button onClick={handleClick}>登　　　録</button>
         </>
     );
 };
