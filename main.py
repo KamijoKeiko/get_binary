@@ -17,8 +17,8 @@ app.add_middleware(
 )
 
 class User(BaseModel):
-    name: str = Form(...)
-    department: str = Form(...)
+    name: str
+    department: str
 
 
 
@@ -32,8 +32,8 @@ async def root():
 
 
 @app.post("/multi_type")
-async def multi_type(user: User, file: UploadFile = File(...)):
-    user_data = {"name": user.name, "department": user.department}
+async def multi_type(name: str = Form(...), department: str = Form(...), file: UploadFile = File(...)):
+    user_data = {"name": name, "department": department}
     file_content = await file.read()
     file_content_base64 = base64.b64encode(file_content)
     data_store.append(user_data)
