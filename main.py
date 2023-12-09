@@ -42,9 +42,7 @@ async def multi_type(name: str = Form(...), department: str = Form(...), file: U
 
 
 @app.post("/base64")
-async def encode_base64(file_name: str = Form(...),
-                        mime_type: str = Form(...),
-                        file: str = Form(...)):
+async def encode_base64(file: str = Form(...)):
     # file_data = {"file_name": file_name, "file_type": mime_type}
     data_store.clear()
     data_store.append(file)

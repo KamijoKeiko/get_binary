@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {useState} from "react";
+import {convertToBase64} from "./ConveretFileUtil.ts";
 import axios from 'axios';
 
 type User = {
@@ -11,14 +12,7 @@ export const Base64: React.FC = () => {
     const [user, setUser] = useState<User>({name: "", department: ""});
     const [file, setFile] = useState<File | null>(null)
 
-    const convertToBase64 = (file: File): Promise<string> => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result as string);
-            reader.onerror = reject;
-            reader.readAsDataURL(file);
-        });
-    };
+
     const handleClick = async () => {
         if (!file) return;
         const startTime = Date.now()
