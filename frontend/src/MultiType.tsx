@@ -13,7 +13,6 @@ export const MultiType: React.FC = () => {
     const handleClick = async () => {
             if (!file) return;
 
-
             const formData = new FormData();
             formData.append('name', user.name)
             formData.append('department', user.department)

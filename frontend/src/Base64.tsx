@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from "react";
-import {convertToBase64} from "./ConveretFileUtil.ts";
+import {encodeFileToBase64} from "./ConvertFileUtil.ts";
 import axios from 'axios';
 
 type User = {
@@ -16,7 +16,7 @@ export const Base64: React.FC = () => {
     const handleClick = async () => {
         if (!file) return;
         const startTime = Date.now()
-        const base64 = await convertToBase64(file);
+        const base64 = await encodeFileToBase64(file);
 
         const formData = new FormData();
         formData.append('name', user.name)
