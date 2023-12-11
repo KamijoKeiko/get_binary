@@ -8,4 +8,5 @@
 - `$ npm run dev`
 
 ### Jestスタート
+- `$ cd frontend`
 - `$ npm test`
