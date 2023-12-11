@@ -89,7 +89,7 @@ describe('downloadBlob', () => {
 
     it('triggers a download process for a blob', () => {
         const mockBlob = new Blob(['test content'], {type: 'text/plain'});
-        const fileName = 'testfile.txt';
+        const fileName = 'testfile.xlsx';
 
         downloadBlob(mockBlob, fileName);
 
