@@ -39,7 +39,7 @@ describe('convertToBase64', () => {
         // ダミーのファイルオブジェクトを作成
         const dummyContent = 'dummy content';
         const blob = new Blob([dummyContent], {type: 'text/plain'});
-        const file = new File([blob], 'dummy.txt', {type: 'text/plain'});
+        const file = new File([blob], 'dummy.xlsx', {type: 'text/plain'});
 
         // convertToBase64関数を実行
         const base64Promise = encodeFileToBase64(file);
