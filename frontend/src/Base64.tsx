@@ -16,18 +16,12 @@ export const Base64: React.FC = () => {
     const handleClick = async () => {
         if (!file) return;
         const startTime = Date.now()
-        const base64 = await encodeFileToBase64(file);
-
-        const formData = new FormData();
-        formData.append('name', user.name)
-        formData.append('department', user.department)
-        formData.append('file_name', file.name);
-        formData.append('mime_type', file.type);
-        formData.append('file', base64)
-        // const startTime = Date.now()
+        const base64Data = await encodeFileToBase64(file);
 
         try {
-            const response = await axios.post('http://localhost:7000/base64', formData);
+            const response = await axios.post('http://localhost:7000/base64',
+              {file: base64Data},
+              {headers:{'Content-Type': 'application/json'}});
             console.log(response.data);
 
             if (response.status == 200) {

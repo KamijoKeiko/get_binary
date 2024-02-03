@@ -1,6 +1,6 @@
 import base64
 
-from fastapi import FastAPI, UploadFile, Form, File
+from fastapi import FastAPI, UploadFile, Form, File, Body
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -19,6 +19,10 @@ app.add_middleware(
 class User(BaseModel):
     name: str = Form(...)
     department: str = Form(...)
+
+
+class FileData(BaseModel):
+    file: str
 
 
 # 仮のデータストア
@@ -42,10 +46,10 @@ async def multi_type(name: str = Form(...), department: str = Form(...), file: U
 
 
 @app.post("/base64")
-async def encode_base64(file: str = Form(...)):
+async def encode_base64(file: FileData):
     # file_data = {"file_name": file_name, "file_type": mime_type}
     data_store.clear()
-    data_store.append(file)
+    data_store.append(file.file)
 
     return {"message": "base64 added successfully"}
 
